@@ -48,7 +48,7 @@ async def get_brouwerij(*, brouwerij: str):
     # bieren overlopen
     for bier in bieren:
         # als de naam matcht
-        if bier.brouwerij == name:
+        if bier.brouwerij == brouwerij:
             # deel van class gebruiken
             bieren_brouwerij.append(bier.naam)
     return bieren_brouwerij
