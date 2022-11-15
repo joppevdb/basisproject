@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-
+# opstarten van api
+app = FastAPI()
 
 origins = [
     "http://localhost",
@@ -30,8 +31,7 @@ class Bier(BaseModel):
     land: str
 
 
-# opstarten van api
-app = FastAPI()
+
 
 # lijst
 bieren = []
