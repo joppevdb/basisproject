@@ -22,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # class voor item
 class Bier(BaseModel):
     naam: str
@@ -30,8 +31,6 @@ class Bier(BaseModel):
     brouwerij: str
     soort: str
     land: str
-
-
 
 
 # lijst
@@ -44,6 +43,8 @@ database = [
     {"naam": "Westmalle triple", "volume": "33", "alcohol_perc": "9.5", "brouwerij": "Westmalle", "soort": "triple",
      "land": "België"},
     {"naam": "Westmalle dubbel", "volume": "33", "alcohol_perc": "7", "brouwerij": "Westmalle", "soort": "dubbel",
+     "land": "België"},
+    {"naam": "Duvel", "volume": "33", "alcohol_perc": "9", "brouwerij": "Duvel Moortgat", "soort": "triple",
      "land": "België"}]
 
 # items van database doorlopen en in lijst zetten
@@ -77,7 +78,7 @@ async def get_brouwerij(*, brouwerij: str):
 @app.get("/soort")
 async def get_soort():
     keys = []
-    soorten = {}
+    soorten = []
     for bier in bieren:
         if bier.soort not in keys:
             keys.append(bier.soort)
@@ -87,7 +88,7 @@ async def get_soort():
         for bier in bieren:
             if bier.soort == keys[i]:
                 bieren_per_soort.append(bier)
-        soorten[keys[i]] = bieren_per_soort
+        soorten.append({"soort": [keys[i]], "bieren": bieren_per_soort})
 
     return soorten
 
