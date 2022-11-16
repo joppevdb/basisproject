@@ -95,5 +95,6 @@ async def get_soort():
 
 @app.post("/bier/", response_model=Bier)
 async def create_bier(bier: Bier):
+    database.append(bier)
     return bier
 
