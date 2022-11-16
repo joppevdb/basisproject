@@ -62,7 +62,7 @@ async def get_bieren():
 
 # get bieren van bepaalde brouwerij
 @app.get("/brouwerij/{brouwerij}")
-async def get_brouwerij(*, brouwerij: str):
+async def get_brouwerij(brouwerij: str):
     # lijst voor de brouwerij
     bieren_brouwerij = []
     # bieren overlopen
