@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -62,7 +62,7 @@ async def get_bieren():
 
 # get bieren van bepaalde brouwerij
 @app.get("/brouwerij/{brouwerij}")
-async def get_brouwerij(brouwerij: str):
+async def get_brouwerij(brouwerij: str | None = Query(default=None, max_length=20)):
     # lijst voor de brouwerij
     bieren_brouwerij = []
     # bieren overlopen
@@ -95,6 +95,14 @@ async def get_soort():
 
 @app.post("/bier/", response_model=Bier)
 async def create_bier(bier: Bier):
-    bieren.append(bier)
-    return bier
+    toevoegen = True
+    for item in bieren:
+        if item.naam == bier.naam:
+            toevoegen = False
+
+    if toevoegen:
+        bieren.append(bier)
+        return bier
+
+
 
